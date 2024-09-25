@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var login: MessageViewModel // Corrección: se usa como @EnvironmentObject
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            if login.showChatApp {
+                ChatView()
+            } else {
+                UserNameView()
+            }
         }
-        .padding()
+        .onAppear {
+            if UserDefaults.standard.object(forKey: "username") != nil {
+                login.showChatApp = true
+            }
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView().environmentObject(MessageViewModel()) // Se pasa el objeto en el preview
 }

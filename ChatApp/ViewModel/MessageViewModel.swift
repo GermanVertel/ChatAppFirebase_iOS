@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class MessageViewModel: ObservableObject {
+    @Published var showChatApp = false
+}

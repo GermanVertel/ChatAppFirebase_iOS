@@ -8,11 +8,40 @@
 import SwiftUI
 
 struct UserNameView: View {
+    
+    @EnvironmentObject var login : MessageViewModel
+    @State private var name = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Color.blue.ignoresSafeArea()
+            VStack{
+                Text("Chat App")
+                    .foregroundStyle(.white)
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 30)
+                TextField("Username", text: $name)
+                    .textFieldStyle(.roundedBorder)
+                
+                Button(action: {
+                    UserDefaults.standard.setValue(name, forKey: "username")
+                    UserDefaults.standard.setValue(UUID().uuidString, forKey: "idUser")
+                    login.showChatApp = true
+                }){
+                    Text("Enter")
+                        .foregroundStyle(.black)
+                        .font(.title2)
+                        .bold()
+                }.buttonStyle(.borderedProminent)
+                    .tint(.white)
+                    .padding(.top,10)
+                Spacer()
+                
+            }.padding(.all)
+        }
     }
 }
 
 #Preview {
-    UserNameView()
+    UserNameView().environmentObject(MessageViewModel()) // Se pasa el objeto en el preview
 }
