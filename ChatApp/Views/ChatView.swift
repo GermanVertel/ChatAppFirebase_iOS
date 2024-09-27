@@ -8,12 +8,27 @@
 import SwiftUI
 
 struct ChatView: View {
+    
+    @EnvironmentObject var login : MessageViewModel
+    @State private var username = ""
+    
     var body: some View {
         NavigationStack{
             VStack{
                 Text("ChatView")
-                    .navigationTitle("Nombre")
-            }
+                    
+            }.navigationTitle(username)
+                .toolbar{
+                    Button("Exit"){
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.removeObject(forKey: "username")
+                            UserDefaults.standard.removeObject(forKey: "idUser")
+                            login.showChatApp = false
+                        }
+                    }
+                }.onAppear{
+                    username = UserDefaults.standard.string(forKey: "username") ?? "User"
+                }
         }
     }
 }
