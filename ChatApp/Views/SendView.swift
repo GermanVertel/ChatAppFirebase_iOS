@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct SendView: View {
+    
+    @StateObject var messageModel = MessageViewModel()
+    @State private var messege = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            TextField("Enter your message", text: $messege)
+                .textFieldStyle(.roundedBorder)
+                .autocorrectionDisabled()
+            
+            Button{
+                print("mensaje")
+            }label: {
+                Image(systemName: "paperplane.fill")
+                    .foregroundStyle(.white)
+                    .padding(10)
+                    .background(Color.blue)
+                    .cornerRadius(50)
+            }
+        }.padding(.horizontal)
+            .padding(.all)
     }
 }
 

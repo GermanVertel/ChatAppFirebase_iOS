@@ -15,7 +15,7 @@ struct ChatView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                Text("ChatView")
+                SendView()
                     
             }.navigationTitle(username)
                 .toolbar{
