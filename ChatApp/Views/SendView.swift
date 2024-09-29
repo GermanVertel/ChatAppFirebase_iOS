@@ -10,15 +10,16 @@ import SwiftUI
 struct SendView: View {
     
     @StateObject var messageModel = MessageViewModel()
-    @State private var messege = ""
+    @State private var message = ""
     var body: some View {
         HStack{
-            TextField("Enter your message", text: $messege)
+            TextField("Enter your message", text: $message)
                 .textFieldStyle(.roundedBorder)
                 .autocorrectionDisabled()
             
             Button{
-                print("mensaje")
+                messageModel.sendMessage(text: message)
+                message = ""
             }label: {
                 Image(systemName: "paperplane.fill")
                     .foregroundStyle(.white)

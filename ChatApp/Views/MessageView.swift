@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MessageView: View {
+    
+    var messages : Messages
+    @State private var bubble = false
+    
     var body: some View {
         VStack(alignment: bubble ? .trailing : .leading ){
             HStack{
@@ -38,8 +42,6 @@ struct MessageView: View {
         }
      
     }
+    
 }
 
-#Preview {
-    MessageView()
-}
